@@ -1,12 +1,11 @@
-provider "aws" {
-  region     = "us-east-2"
-}
+import boto3
+import logging
+client = boto3.client('s3')
 
-resource "aws_s3_bucket" "bb" {
- # bucket = "conformance-pack-aws"
-  #aws_s3_bucket_acl = "public"
-  tags = {
-    Name        = "My bucket"
-    Environment = "test"
-  }
-}
+response = client.create_bucket(
+   # ACL='private'|'public-read'|'public-read-write'|'authenticated-read',
+    #Bucket='kiransai3214567788',
+    CreateBucketConfiguration={
+        'LocationConstraint': 'us-east-2'
+    },
+)
